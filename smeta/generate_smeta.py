@@ -663,6 +663,112 @@ for i, s in enumerate(stages):
     ws4.cell(row=17 + i, column=1, value=s)
     ws4.merge_cells(start_row=17 + i, start_column=1, end_row=17 + i, end_column=2)
 
+# ===================================================================
+# ЛИСТ — Сравнение вагонка vs МДФ (пол — ламинат в обоих)
+# ===================================================================
+ws5 = wb.create_sheet("Сравнение вагонка vs МДФ", 2)  # после сводки
+ws5["A1"] = "Сравнение отделки: вагонка vs МДФ-панели (пол — ламинат, без изменений)"
+ws5["A1"].font = title_font
+ws5.merge_cells("A1:E1")
+ws5["A2"] = (
+    "Смета по умолчанию сейчас на ВАГОНКЕ. Ниже — сколько сэкономите, если стены/потолки сделать МДФ-панелями. "
+    "Полы (ламинат), с/у (плитка), инженерия и мебель — одинаковые."
+)
+ws5["A2"].font = note_font
+ws5.merge_cells("A2:E2")
+ws5.row_dimensions[2].height = 36
+
+# Recalc finish blocks from section_totals by title keywords
+vag_walls = next(s for t, s, _ in section_totals if "СТЕН" in t and "ВАГОНК" in t)
+vag_ceil = next(s for t, s, _ in section_totals if "ПОТОЛК" in t and "ВАГОНК" in t)
+vag_finish = vag_walls + vag_ceil
+floors_sum = next(s for t, s, _ in section_totals if t.startswith("3. ПОЛЫ"))
+
+# MDF mid (laminated, no paint)
+mdf_walls = (
+    22 * 280 + 50 * 45 + 140 * 55 + 130 * 580 + 8 * 500 + 7000
+    + 40 * 90 + 30 * 220 + 18 * 450 + 6 * 1200
+)
+mdf_ceil = 80 * 55 + 48 * 520 + 3000 + 40 * 150
+mdf_finish = mdf_walls + mdf_ceil
+# MDF economy
+econ_walls = (
+    22 * 280 + 50 * 45 + 140 * 55 + 130 * 400 + 8 * 400 + 7000
+    + 40 * 90 + 30 * 220 + 18 * 450 + 6 * 1200
+)
+econ_ceil = 80 * 55 + 48 * 380 + 3000 + 40 * 150
+econ_finish = econ_walls + econ_ceil
+
+delta_mdf = vag_finish - mdf_finish
+delta_econ = vag_finish - econ_finish
+
+for i, h in enumerate(
+    ["Показатель", "Вагонка (текущая смета)", "МДФ панели", "МДФ эконом", "Комментарий"], 1
+):
+    ws5.cell(row=4, column=i, value=h)
+style_header(ws5, 4, 5)
+
+rows_cmp = [
+    ("Стены (материалы)", vag_walls, mdf_walls, econ_walls, "МДФ без покраски — уже в пленке"),
+    ("Потолки (материалы)", vag_ceil, mdf_ceil, econ_ceil, "МДФ без покраски"),
+    ("Итого стены+потолки", vag_finish, mdf_finish, econ_finish, ""),
+    ("Полы ламинат", floors_sum, floors_sum, floors_sum, "одинаково во всех вариантах"),
+    (
+        "ВСЯ СМЕТА дома",
+        grand_money,
+        grand_money - delta_mdf,
+        grand_money - delta_econ,
+        "остальные разделы без изменений",
+    ),
+    (
+        "Экономия vs вагонка",
+        0,
+        delta_mdf,
+        delta_econ,
+        f"МДФ дешевле отделки на {100 * delta_mdf / vag_finish:.0f}% / эконом на {100 * delta_econ / vag_finish:.0f}%",
+    ),
+]
+for i, (name, a, b, c, note) in enumerate(rows_cmp):
+    r = 5 + i
+    ws5.cell(row=r, column=1, value=name).border = thin
+    for col, val in enumerate((a, b, c), 2):
+        cell = ws5.cell(row=r, column=col, value=val)
+        cell.number_format = "#,##0"
+        cell.border = thin
+        if "ВСЯ СМЕТА" in name or "Итого" in name:
+            cell.font = total_font
+            cell.fill = total_fill
+            ws5.cell(row=r, column=1).fill = total_fill
+            ws5.cell(row=r, column=1).font = total_font
+        if "Экономия" in name:
+            cell.font = grand_font
+            cell.fill = grand_fill
+            ws5.cell(row=r, column=1).fill = grand_fill
+            ws5.cell(row=r, column=1).font = grand_font
+    ws5.cell(row=r, column=5, value=note).border = thin
+    ws5.cell(row=r, column=5).alignment = wrap
+
+ws5.cell(row=12, column=1, value="Плюсы / минусы").font = section_font
+ws5.merge_cells("A13:E16")
+ws5["A13"] = (
+    "ВАГОНКА: теплее на вид и на ощупь, лучше для «домашнего» фото посуточной, можно перекрасить; "
+    "дороже, нужна покраска, дольше монтаж.\n"
+    "МДФ ПАНЕЛИ: дешевле на ~80 тыс. ₽ (эконом ~110 тыс.), быстрее (без покраски), ровный цвет; "
+    "боится воды и сильных ударов, во влажных зонах хуже дерева, выглядит «офиснее», сложнее точечный ремонт.\n"
+    "Для посуточной: вагонка обычно даёт более дорогой визуал в объявлении; МДФ — разумная экономия, "
+    "если бюджет жмёт. С/у в любом случае лучше плиткой (уже в смете).\n"
+    "Пол — ламинат 33 кл. в обоих вариантах (~103 500 ₽)."
+)
+ws5["A13"].alignment = wrap
+ws5["A13"].font = money_font
+ws5.row_dimensions[13].height = 90
+
+ws5.column_dimensions["A"].width = 28
+ws5.column_dimensions["B"].width = 24
+ws5.column_dimensions["C"].width = 16
+ws5.column_dimensions["D"].width = 14
+ws5.column_dimensions["E"].width = 42
+
 # Save to several obvious locations
 paths = [
     Path("/workspace/Smeta_vnutryanka_posutochno.xlsx"),
