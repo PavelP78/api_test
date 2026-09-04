@@ -1,0 +1,21 @@
+{
+  "crs": "МСК-47, зона 1; чертёж: восток–север, м, точка 1 = (0, 0)",
+  "plot_area_m2": 602.66,
+  "zone_area_m2": 37.5,
+  "buildable_without_setbacks_m2": 565.16,
+  "zone_share_pct": 6.22,
+  "zone_typical_width_m": 2.42,
+  "setback_m": 3.0,
+  "inset_area_m2": 327.94,
+  "usable_after_gas_and_setback_m2": 327.94,
+  "house_m": [
+    6.12,
+    10.0
+  ],
+  "house_fits": true,
+  "house_sw_east_north_m": [
+    -11.79,
+    -21.15
+  ],
+  "perimeter_m": 104.83
+}
