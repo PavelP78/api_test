@@ -1,0 +1,248 @@
+{
+  "snap": true,
+  "floors": {
+    "floors": [
+      {
+        "id": "floor-site",
+        "kind": "site",
+        "name": "Участок",
+        "order": 0,
+        "heightM": null
+      }
+    ],
+    "activeFloorId": "floor-site",
+    "tracingFloors": [],
+    "sectionByFloor": {
+      "floor-site": "base"
+    }
+  },
+  "layers": [
+    {
+      "id": "layer-default",
+      "icon": "layer",
+      "name": "План",
+      "role": "structure",
+      "color": "#64748b",
+      "hidden": false,
+      "locked": false,
+      "floorId": "floor-site"
+    }
+  ],
+  "objects": [
+    {
+      "x": 0,
+      "y": 0,
+      "id": "plot-1",
+      "data": {
+        "kind": "plot",
+        "label": "47:01:1516001:2322",
+        "cadnum": "47:01:1516001:2322",
+        "locked": false,
+        "points": [
+          {
+            "x": 445.55999999999995,
+            "y": -766.76
+          },
+          {
+            "x": -172.28000000000003,
+            "y": -765.4000000000001
+          },
+          {
+            "x": -450.79999999999995,
+            "y": 112.92
+          },
+          {
+            "x": 450.79999999999995,
+            "y": 766.72
+          }
+        ],
+        "thicknessM": 0,
+        "offsetZones": [
+          {
+            "distM": 3.5,
+            "label": "отступ 3.5 м"
+          }
+        ]
+      },
+      "type": "house-poly",
+      "layerId": "layer-default",
+      "rotation": 0
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "id": "fence-1",
+      "data": {
+        "post": {
+          "kind": "profile",
+          "widthM": 0.06
+        },
+        "label": "Забор евроштакетник",
+        "style": "picket",
+        "closed": true,
+        "points": [
+          {
+            "x": 445.55999999999995,
+            "y": -766.76
+          },
+          {
+            "x": -172.28000000000003,
+            "y": -765.4000000000001
+          },
+          {
+            "x": -450.79999999999995,
+            "y": 112.92
+          },
+          {
+            "x": 450.79999999999995,
+            "y": 766.72
+          }
+        ],
+        "preset": "picket-metal",
+        "heightM": 1.8,
+        "foundation": {
+          "kind": "concrete-point"
+        },
+        "thicknessM": 0,
+        "postMaterial": null,
+        "postSpacingM": 2.5,
+        "panelMaterial": "metal"
+      },
+      "type": "fence",
+      "layerId": "layer-default",
+      "rotation": 0
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "id": "gate-1",
+      "data": {
+        "t": 0.20867447361794234,
+        "seg": 3,
+        "kind": "gate",
+        "label": "Ворота 4 м",
+        "widthM": 4.0,
+        "subtype": "double",
+        "parentId": "fence-1"
+      },
+      "type": "fence-opening",
+      "layerId": "layer-default",
+      "rotation": 0
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "id": "wicket-1",
+      "data": {
+        "t": 0.2843189703044464,
+        "seg": 3,
+        "kind": "wicket",
+        "label": "Калитка",
+        "widthM": 1.0,
+        "subtype": "swing",
+        "parentId": "fence-1"
+      },
+      "type": "fence-opening",
+      "layerId": "layer-default",
+      "rotation": 0
+    },
+    {
+      "x": -14.8,
+      "y": -16.4,
+      "id": "house-1",
+      "data": {
+        "eaveM": 0.3,
+        "label": "Барнхаус 10.5×6",
+        "depthM": 6.0,
+        "widthM": 10.5,
+        "heightM": 2.615,
+        "roofType": "gable",
+        "roofGableAxis": "long",
+        "wallThicknessM": 0.25
+      },
+      "type": "house",
+      "layerId": "layer-default",
+      "rotation": 0
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "id": "porch-1",
+      "data": {
+        "t": 0.5,
+        "seg": 1,
+        "kind": "porch",
+        "label": "Терраса 9.12 м²",
+        "depthM": 1.55,
+        "widthM": 6.0,
+        "parentId": "house-1"
+      },
+      "type": "house-attachment",
+      "layerId": "layer-default",
+      "rotation": 0
+    },
+    {
+      "x": 332.0,
+      "y": 340.0,
+      "id": "car-1",
+      "data": {
+        "kind": "car",
+        "label": "Машина 1",
+        "widthM": 2.0,
+        "lengthM": 4.6,
+        "dimensionStyle": "drafting",
+        "carModelVariant": "cosmo-mobil"
+      },
+      "type": "car",
+      "layerId": "layer-default",
+      "rotation": 90
+    },
+    {
+      "x": 332.0,
+      "y": 456.0,
+      "id": "car-2",
+      "data": {
+        "kind": "car",
+        "label": "Машина 2",
+        "widthM": 2.0,
+        "lengthM": 4.6,
+        "dimensionStyle": "drafting",
+        "carModelVariant": "cosmo-mobil"
+      },
+      "type": "car",
+      "layerId": "layer-default",
+      "rotation": 90
+    }
+  ],
+  "version": 11,
+  "mapLayer": {
+    "kind": "hybrid",
+    "enabled": false,
+    "opacity": 1,
+    "provider": "esri"
+  },
+  "showGrid": true,
+  "geoAnchor": {
+    "lat": 60.51267927,
+    "lon": 29.71441952,
+    "sceneX": 0,
+    "sceneY": 0
+  },
+  "polarSnap": true,
+  "gridMeters": 1,
+  "sheetTheme": null,
+  "vertexSnap": true,
+  "priceCountry": "ru",
+  "sceneCountry": "ru",
+  "activeLayerId": "layer-default",
+  "priceCurrency": "RUB",
+  "sceneRotation": 0,
+  "materialPrices": {},
+  "pixelsPerMeter": 40,
+  "polarAngleStep": 15,
+  "roomLabelsMode": "auto",
+  "smartInference": true,
+  "measurementUnit": "m",
+  "polarLengthStep": 0.1,
+  "scaleCalibration": null
+}
