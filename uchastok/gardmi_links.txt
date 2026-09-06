@@ -1,17 +1,13 @@
-Проект Gardmi — участок 47:01:1516001:2322
+Проект Gardmi на аккаунте piasunovpavil@gmail.com
+участок 47:01:1516001:2322
+
+Мои проекты:
+https://gardmi.com/ru/app/editor/my/
+
+Редактор:
+https://gardmi.com/ru/app/editor/QlDg37Eolu/
 
 Просмотр:
-https://gardmi.com/s/N7cFGlRRdn_-kryVTmXUug/
+https://gardmi.com/s/YwxtfZJpdg6pCqsmDCaFwQ/
 
-Редактирование (откройте после входа в свой аккаунт):
-https://gardmi.com/s/uGIKLqEitm1soyTiDzQKUg/
-
-Вход в Gardmi (код на почту, пароль не нужен):
-https://gardmi.com/ru/app/accounts/login/
-
-Файл для File → Open в редакторе:
-gardmi-project.json
-
-Полный снимок API:
-gardmi_47-01-1516001-2322.json
-
+Slug: QlDg37Eolu
